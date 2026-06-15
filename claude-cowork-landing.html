@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Cowork Workflow — Setup 10 Phút, Tiết Kiệm 3–4 Giờ/Ngày</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Nền đủ tối nhưng không pure black — tránh contrast quá gay gắt */
+      --bg:         #0D1117;
+      --surface-1:  #161B22;   /* card chính — đủ sáng hơn nền để phân biệt */
+      --surface-2:  #1C2230;   /* card lồng bên trong */
+      --surface-3:  #21293A;   /* code block, pre */
+
+      /* Accent */
+      --accent:     #7C8CF8;   /* indigo sáng, dễ đọc trên nền tối */
+      --accent-dim: rgba(124,140,248,0.15);
+      --accent-border: rgba(124,140,248,0.3);
+
+      /* Text — 3 cấp độ rõ ràng */
+      --text-primary:   #F0F6FC;   /* heading, body chính */
+      --text-secondary: #C9D1D9;   /* paragraph, mô tả */
+      --text-muted:     #8B949E;   /* label, caption */
+
+      /* Màu trạng thái */
+      --green:    #3FB950;
+      --red:      #F85149;
+      --yellow:   #E3B341;
+      --cyan:     #39C5CF;
+
+      --border:   rgba(48,54,61,1);   /* border mặc định — solid, visible */
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── LAYOUT ─── */
+    .page { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 80px 0 64px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5.5vw, 58px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(90deg, #7C8CF8 0%, #B794F4 50%, #63B3ED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+
+    /* ─── STATS STRIP ─── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .stat-cell {
+      background: var(--surface-1);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .stat-cell .val {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-cell .lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ─── REQUIREMENT NOTE ─── */
+    .req-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--yellow);
+      background: rgba(227,179,65,0.08);
+      border: 1px solid rgba(227,179,65,0.25);
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+    }
+    .section-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ─── BENEFIT CARDS ─── */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .benefit-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+    }
+    .benefit-card .icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .benefit-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .benefit-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── STEPS ─── */
+    .steps-intro {
+      padding: 64px 0 40px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .step-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 28px;
+    }
+
+    .step-badge {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .step-meta { flex: 1; }
+    .step-meta h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .step-meta .tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .step-time-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .step-content {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+      padding-top: 24px;
+    }
+
+    /* ─── FILE CARDS ─── */
+    .file-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .file-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .file-card .fname {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .file-card .fdesc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .file-card pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1.75;
+      color: var(--text-secondary);   /* #C9D1D9 — đủ sáng để đọc */
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ─── CALLOUT VARIANTS ─── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      margin-top: 16px;
+    }
+    .callout-icon { flex-shrink: 0; margin-top: 1px; }
+    .callout.info {
+      background: rgba(57,197,207,0.07);
+      border: 1px solid rgba(57,197,207,0.2);
+      color: #A5F3FC;
+    }
+    .callout.tip {
+      background: rgba(124,140,248,0.07);
+      border-left: 3px solid var(--accent);
+      color: var(--text-secondary);
+      border-radius: 0 8px 8px 0;
+    }
+    .callout.tip strong { color: var(--text-primary); }
+    .callout.warn {
+      background: rgba(227,179,65,0.07);
+      border: 1px solid rgba(227,179,65,0.2);
+      color: #FDE68A;
+    }
+
+    /* ─── TEMPLATE BOX ─── */
+    .tpl-box {
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .tpl-label {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tpl-box pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--text-secondary);   /* rõ ràng */
+      background: var(--surface-3);
+      padding: 16px 18px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ─── PLUGINS WRAP ─── */
+    .plugin-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .plugin-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ─── HOW-TO STEPS ─── */
+    .howto {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .howto-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .howto-n {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .howto-item strong { color: var(--text-primary); }
+    code.inline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--surface-2);
+      color: var(--accent);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--accent-border);
+    }
+
+    /* ─── FORMULA BOX ─── */
+    .formula {
+      background: var(--surface-2);
+      border: 1px solid var(--accent-border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .formula .f-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .formula pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-primary);   /* trắng — đây là điểm nhấn */
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+    .formula .variants { display: flex; flex-direction: column; gap: 6px; }
+    .formula .variant {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .formula .variant::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+    /* ─── COMPARE ─── */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .compare-panel {
+      background: var(--surface-2);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .compare-panel.bad  { border: 1px solid rgba(248,81,73,0.3); }
+    .compare-panel.good { border: 1px solid rgba(63,185,80,0.3); }
+    .c-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .compare-panel.bad  .c-label { color: var(--red); }
+    .compare-panel.good .c-label { color: var(--green); }
+    .chat { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 8px; }
+    .chat strong { color: var(--text-primary); display: block; margin-bottom: 2px; font-size: 12px; }
+    .chat .hl { color: var(--green); font-weight: 600; }
+
+    /* ─── RESULTS GRID ─── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .result-cell {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .result-num {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .result-lbl {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ─── BONUS ─── */
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .bonus-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 20px;
+    }
+    .bonus-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .bonus-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      padding: 72px 0 80px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.015em;
+    }
+    .cta-section p { font-size: 15px; color: var(--text-secondary); margin-bottom: 36px; }
+
+    .cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+    .btn-p:hover { opacity: 0.88; }
+    .btn-s {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-1);
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 600;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-s:hover { border-color: var(--accent); background: var(--surface-2); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── UTILITY ─── */
+    .mt8  { margin-top: 8px; }
+    .mt16 { margin-top: 16px; }
+    .mt20 { margin-top: 20px; }
+    .mb8  { margin-bottom: 8px; }
+    p.body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .stats-strip { grid-template-columns: repeat(2,1fr); }
+      .compare { grid-template-columns: 1fr; }
+      .step-head { flex-wrap: wrap; }
+      .step-time-chip { margin-left: 52px; }
+      .file-row { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="page">
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Claude Cowork Workflow
+    </div>
+
+    <h1>
+      Setup <span class="grad">10 phút</span><br />
+      Tiết kiệm 3–4 giờ mỗi ngày
+    </h1>
+
+    <p class="hero-desc">
+      Hướng dẫn 4 bước để biến Claude Cowork thành trợ lý AI hiểu đúng cách bạn làm việc — không cần viết prompt dài nữa.
+    </p>
+
+    <div class="stats-strip">
+      <div class="stat-cell">
+        <div class="val">4</div>
+        <div class="lbl">Bước thiết lập</div>
+      </div>
+      <div class="stat-cell">
+        <div class="val">~10'</div>
+        <div class="lbl">Thời gian setup</div>
+      </div>
+      <div class="stat-cell">
+        <div class="val">3–4h</div>
+        <div class="lbl">Tiết kiệm / ngày</div>
+      </div>
+      <div class="stat-cell">
+        <div class="val">∞</div>
+        <div class="lbl">Dùng mãi mãi</div>
+      </div>
+    </div>
+
+    <div class="req-note">
+      ⚠️ Yêu cầu: <strong>Claude Pro / Max / Team / Enterprise</strong>&nbsp;+&nbsp;<strong>Claude Desktop App</strong>
+    </div>
+  </section>
+
+  <!-- ══════════ BENEFITS ══════════ -->
+  <section class="section">
+    <div class="section-tag">Lợi ích</div>
+    <h2 class="section-title">Tại sao cần thiết lập workflow này?</h2>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <span class="icon">🧠</span>
+        <h3>Claude hiểu bạn sâu hơn</h3>
+        <p>Không cần giải thích lại từ đầu mỗi khi mở session mới.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="icon">⚡</span>
+        <h3>Prompt ngắn hơn 80%</h3>
+        <p>Context đã có sẵn — chỉ cần nói việc cần làm, Claude tự xử lý phần còn lại.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="icon">🎯</span>
+        <h3>Output chuẩn ngay lần đầu</h3>
+        <p>Claude hỏi lại trước khi làm — không tự đoán mò và cho ra kết quả lệch hướng.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="icon">🔧</span>
+        <h3>Chuyên môn hoá theo ngành</h3>
+        <p>Plugins biến Claude thành chuyên gia đúng lĩnh vực, không phải AI đa năng chung chung.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ STEPS INTRO ══════════ -->
+  <div class="steps-intro">
+    <div class="section-tag" style="text-align:center;">Quy trình</div>
+    <h2 class="section-title" style="text-align:center;">4 bước từ zero đến workflow hoàn chỉnh</h2>
+    <p class="section-body" style="margin: 8px auto 0; text-align:center;">Làm đúng thứ tự — mỗi bước tích lũy lên bước tiếp theo.</p>
+  </div>
+
+  <!-- ══════════ STEP LIST ══════════ -->
+  <div class="step-list" id="steps">
+
+    <!-- ── STEP 1 ── -->
+    <div class="step-card" id="step1">
+      <div class="step-head">
+        <div class="step-badge">1</div>
+        <div class="step-meta">
+          <h2>📁 Tạo Folder Claude Context với 3 File</h2>
+          <div class="tagline">Cung cấp ngữ cảnh nền — càng chi tiết, prompt càng ngắn</div>
+        </div>
+        <div class="step-time-chip">~3 phút</div>
+      </div>
+      <div class="step-content">
+        <p class="body">Tạo một folder trên máy đặt tên là <code class="inline">claude-context</code>, rồi tạo 3 file sau bên trong:</p>
+
+        <div class="file-row">
+          <div class="file-card">
+            <div class="fname">👤 about-me.md</div>
+            <div class="fdesc">Giới thiệu bản thân</div>
+            <pre># Về tôi
+Tên: [Tên của bạn]
+Công ty: [Tên công ty]
+Vai trò: [Chức vụ]
+Ngành: [Ngành nghề]
+
+# Chuyên môn
+- [Điểm mạnh 1]
+- [Điểm mạnh 2]
+- [Công cụ hay dùng]
+
+# Mục tiêu làm việc
+[Bạn đang cố đạt gì]</pre>
+          </div>
+          <div class="file-card">
+            <div class="fname">🎨 brand-style.md</div>
+            <div class="fdesc">Phong cách thương hiệu</div>
+            <pre># Giọng văn & Tone
+- Thân thiện, chuyên nghiệp
+- Ngắn gọn, đúng trọng tâm
+- Tránh jargon kỹ thuật
+
+# Đối tượng mục tiêu
+[Mô tả khách hàng]
+
+# Từ khoá thương hiệu
+- [Từ hay dùng]
+- [Cụm từ đặc trưng]
+
+# KHÔNG sử dụng
+- [Từ cần tránh]</pre>
+          </div>
+          <div class="file-card">
+            <div class="fname">⚡ work-process.md</div>
+            <div class="fdesc">Cách làm việc của bạn</div>
+            <pre># Quy trình làm việc
+- [Công cụ chính: Notion…]
+- [Cách tổ chức dự án]
+
+# Output ưa thích
+- Format: markdown / bullet
+- Độ dài: ngắn / chi tiết
+- Ngôn ngữ: Tiếng Việt
+
+# Task hay gặp
+- [Task lặp lại 1]
+- [Task lặp lại 2]</pre>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <div><strong>Tại sao 3 file quan trọng?</strong> Claude đọc folder này như "bộ nhớ nền" trước mỗi session. Thay vì phải giải thích lại "tôi là ai, style thế nào" — Claude đã biết rồi. Bạn chỉ cần nói <strong>việc cần làm</strong>.</div>
+        </div>
+
+        <div class="callout info mt8">
+          <span class="callout-icon">✅</span>
+          <div>Khi bắt đầu task trong Cowork, nhấn nút chọn thư mục (📂) để trỏ vào folder <code class="inline">claude-context</code>. Claude sẽ tự đọc và dùng làm context cho toàn bộ session.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2 ── -->
+    <div class="step-card" id="step2">
+      <div class="step-head">
+        <div class="step-badge">2</div>
+        <div class="step-meta">
+          <h2>⚙️ Thiết lập Global Instructions</h2>
+          <div class="tagline">Chỉ dẫn tự động kích hoạt trong mọi session</div>
+        </div>
+        <div class="step-time-chip">~2 phút</div>
+      </div>
+      <div class="step-content">
+        <div class="callout info">
+          <span class="callout-icon">📍</span>
+          <div>Mở <strong>Claude Desktop</strong> → chuyển tab <strong>Cowork</strong> → vào <strong>Settings → Cowork</strong> → nhấn <strong>"Edit"</strong> bên cạnh "Global instructions" → nhập → nhấn <strong>"Save"</strong>.</div>
+        </div>
+
+        <div class="tpl-box mt16">
+          <div class="tpl-label">📋 Template Global Instructions — copy &amp; chỉnh sửa</div>
+          <pre>## Vai trò của tôi
+Tôi là [chức vụ] tại [công ty].
+Tôi làm chủ yếu về [lĩnh vực].
+Ngôn ngữ mặc định: Tiếng Việt.
+
+## Cách tôi muốn bạn làm việc
+- Luôn ngắn gọn, đúng trọng tâm.
+- Dùng bullet point cho danh sách, heading rõ cho tài liệu dài.
+- Format ưu tiên: Markdown.
+
+## Quy tắc khi làm việc cùng tôi
+- KHÔNG đoán mò khi thiếu thông tin — hỏi tôi trước.
+- Nếu task phức tạp: đề xuất kế hoạch trước, chờ xác nhận.
+- Luôn hỏi lại nếu yêu cầu có thể hiểu theo nhiều cách.
+
+## Background context
+- Khách hàng chủ yếu là: [mô tả ngắn]
+- Tool hay dùng: [Notion, Figma, Google Workspace…]
+- Tone thương hiệu: [mô tả ngắn]</pre>
+        </div>
+
+        <div class="callout tip mt8">
+          <span class="callout-icon">🔑</span>
+          <div>
+            <strong>Global Instructions vs. Context Folder</strong><br />
+            <strong>Global Instructions</strong> = chỉ dẫn hành vi (làm gì, không làm gì, format ra sao).<br />
+            <strong>Context Folder</strong> = dữ liệu nền (bạn là ai, thương hiệu thế nào).<br />
+            Kết hợp cả hai = Claude vừa biết <em>cách</em> làm, vừa biết <em>ai</em> mình đang làm cùng.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 3 ── -->
+    <div class="step-card" id="step3">
+      <div class="step-head">
+        <div class="step-badge">3</div>
+        <div class="step-meta">
+          <h2>🔌 Cài Plugins Đúng Chuyên Môn</h2>
+          <div class="tagline">Biến Claude thành chuyên gia thực thụ trong đúng lĩnh vực của bạn</div>
+        </div>
+        <div class="step-time-chip">~3 phút</div>
+      </div>
+      <div class="step-content">
+        <p class="body">Anthropic cung cấp 11 plugin chính thức, phủ hầu hết mọi lĩnh vực. Cài một lần, dùng mãi.</p>
+
+        <div class="plugin-wrap mt16">
+          <span class="plugin-chip">💼 Sales</span>
+          <span class="plugin-chip">⚖️ Legal</span>
+          <span class="plugin-chip">📣 Marketing</span>
+          <span class="plugin-chip">💰 Finance</span>
+          <span class="plugin-chip">🎯 Product</span>
+          <span class="plugin-chip">🤝 Support</span>
+          <span class="plugin-chip">📊 Data Analysis</span>
+          <span class="plugin-chip">🔍 Research</span>
+          <span class="plugin-chip">👥 HR</span>
+          <span class="plugin-chip">⚙️ Engineering</span>
+          <span class="plugin-chip">🎨 Design</span>
+        </div>
+
+        <div class="howto mt16">
+          <div class="howto-item"><span class="howto-n">1</span> Mở <strong>Claude Desktop</strong> → chuyển tab <strong>Cowork</strong></div>
+          <div class="howto-item"><span class="howto-n">2</span> Click <strong>"Customize"</strong> ở sidebar bên trái</div>
+          <div class="howto-item"><span class="howto-n">3</span> Click <strong>"Browse plugins"</strong> → chọn plugin → <strong>"Install"</strong></div>
+          <div class="howto-item"><span class="howto-n">4</span> Gõ <code class="inline">/</code> trong bất kỳ task nào để xem danh sách skills của plugin</div>
+        </div>
+
+        <div class="callout info mt8">
+          <span class="callout-icon">🔌</span>
+          <div>Nhiều plugins tích hợp sẵn với Google Drive, Gmail, Slack, Notion, DocuSign và hơn 50 dịch vụ khác — không cần setup riêng lẻ.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 4 ── -->
+    <div class="step-card" id="step4">
+      <div class="step-head">
+        <div class="step-badge" style="background: linear-gradient(135deg, #7C8CF8, #B794F4);">4</div>
+        <div class="step-meta">
+          <h2>✨ Kỹ Thuật Đặt Câu Lệnh Ngược</h2>
+          <div class="tagline">Khiến Claude không bao giờ đoán mò — luôn hỏi lại trước khi làm</div>
+        </div>
+        <div class="step-time-chip" style="background:rgba(183,148,244,0.12); border-color:rgba(183,148,244,0.3); color:#B794F4;">⭐ Quan trọng nhất</div>
+      </div>
+      <div class="step-content">
+        <div class="formula">
+          <div class="f-label">🎯 Công thức "Reverse Prompt"</div>
+          <pre>[Nội dung công việc của bạn như bình thường...]
+
+---
+Trước khi bắt đầu, hãy đặt câu hỏi để làm rõ mọi thứ bạn cần biết nhé!</pre>
+          <div class="variants">
+            <div class="variant">"Hỏi tôi những gì bạn cần để làm tốt nhất"</div>
+            <div class="variant">"Đặt câu hỏi trước khi triển khai"</div>
+            <div class="variant">"Xác nhận lại yêu cầu trước khi bắt tay vào làm"</div>
+          </div>
+        </div>
+
+        <p class="body mb8">Sự khác biệt trước và sau khi dùng kỹ thuật này:</p>
+
+        <div class="compare">
+          <div class="compare-panel bad">
+            <div class="c-label">❌ Không dùng kỹ thuật</div>
+            <div class="chat"><strong>Bạn:</strong> "Viết email cho khách hàng về sản phẩm mới"</div>
+            <div class="chat"><strong>Claude:</strong> Ngay lập tức viết một email chung chung, sai tone, sai đối tượng — cần sửa 3–4 lần.</div>
+          </div>
+          <div class="compare-panel good">
+            <div class="c-label">✅ Có dùng kỹ thuật</div>
+            <div class="chat"><strong>Bạn:</strong> "Viết email cho khách hàng về sản phẩm mới. <span class="hl">Hỏi tôi những gì cần biết trước nhé!</span>"</div>
+            <div class="chat"><strong>Claude:</strong> "Sản phẩm tên gì? Đối tượng nhận email? Mục tiêu? Tone muốn dùng?"</div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <span class="callout-icon">🚀</span>
+          <div><strong>Tại sao đây là bước quan trọng nhất?</strong> 3 bước trước giúp Claude hiểu <em>bạn là ai</em>. Bước 4 đảm bảo Claude hiểu đúng <em>bạn muốn gì</em> trong từng task. Kết hợp cả 4 bước = workflow không bao giờ cho ra output cần sửa lại nhiều lần.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end step-list -->
+
+  <!-- ══════════ RESULTS ══════════ -->
+  <section class="section">
+    <div class="section-tag" style="text-align:center;">Kết quả</div>
+    <h2 class="section-title" style="text-align:center;">Sau khi hoàn thành 4 bước</h2>
+    <div class="results-grid">
+      <div class="result-cell">
+        <div class="result-num">3–4h</div>
+        <div class="result-lbl">Tiết kiệm mỗi ngày</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">80%</div>
+        <div class="result-lbl">Prompt ngắn hơn</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">0</div>
+        <div class="result-lbl">Lần phải giải thích lại</div>
+      </div>
+      <div class="result-cell">
+        <div class="result-num">1×</div>
+        <div class="result-lbl">Setup, dùng mãi mãi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ BONUS ══════════ -->
+  <section class="section" id="tips">
+    <div class="section-tag">Nâng cao</div>
+    <h2 class="section-title">💡 Bonus Tips</h2>
+    <p class="section-body">Những mẹo nhỏ giúp tăng hiệu quả sử dụng Claude Cowork thêm một bậc.</p>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <h4>🗂️ Dùng Projects trong Cowork</h4>
+        <p>Tạo Projects riêng cho từng loại công việc ("Content Marketing", "Sales Pipeline"). Mỗi Project có file, context và memory riêng — không bị lẫn lộn.</p>
+      </div>
+      <div class="bonus-card">
+        <h4>⏰ Lên lịch task tự động</h4>
+        <p>Gõ <code class="inline">/schedule</code> trong Cowork để tạo task chạy định kỳ. Ví dụ: "Tổng hợp email vào 8h sáng mỗi ngày" — Claude tự làm khi máy đang mở.</p>
+      </div>
+      <div class="bonus-card">
+        <h4>🔄 Nâng cấp context định kỳ</h4>
+        <p>Mỗi tháng một lần, cập nhật 3 file context khi có thay đổi (sản phẩm mới, khách hàng mới). Claude tự phản ánh sự thay đổi đó ngay lập tức.</p>
+      </div>
+      <div class="bonus-card">
+        <h4>📱 Assign task từ điện thoại</h4>
+        <p>Với gói Pro/Max, bạn có thể giao task cho Claude từ app mobile trong khi desktop đang chạy. Đi ra ngoài vẫn điều khiển được Claude làm việc.</p>
+      </div>
+      <div class="bonus-card">
+        <h4>🎯 Customize plugin theo bạn</h4>
+        <p>Sau khi cài plugin, nhấn "Customize" để Claude điều chỉnh skills và connectors cho đúng workflow riêng — không cần setup thủ công từng cái.</p>
+      </div>
+      <div class="bonus-card">
+        <h4>💬 Thêm câu khoá cho Instructions</h4>
+        <p>Thêm vào Global Instructions: <code class="inline">"Đề xuất 2–3 phương án trước khi làm nếu task có nhiều cách."</code> — Claude luôn cho bạn lựa chọn.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CTA ══════════ -->
+  <div class="cta-section">
+    <h2>Sẵn sàng bắt đầu chưa?</h2>
+    <p>Tài liệu chính thức từ Anthropic để đọc thêm chi tiết và bắt đầu ngay.</p>
+    <div class="cta-btns">
+      <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" class="btn-p" target="_blank" rel="noopener">📖 Get Started with Cowork</a>
+      <a href="https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork" class="btn-s" target="_blank" rel="noopener">🔌 Hướng dẫn Plugins</a>
+      <a href="https://claude.com/download" class="btn-s" target="_blank" rel="noopener">⬇️ Download Claude Desktop</a>
+    </div>
+  </div>
+</div><!-- end .page -->
+
+<footer>
+  Tổng hợp từ tài liệu chính thức của Anthropic &nbsp;·&nbsp; Claude Cowork &nbsp;·&nbsp; Cập nhật tháng 5/2026
+</footer>
+
+</body>
+</html>
