@@ -1,11 +1,294 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Danh sách Landing Page</h1>
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FLASH AI Platform | Tổng quan hệ thống</title>
+    <meta
+      name="description"
+      content="Trang landing page một cột mô tả đầy đủ FLASH AI Platform: vision, features, tech stack, architecture, workflow, benefits, workspace isolation và governance."
+    />
+    <link rel="icon" href="assets/flash-ai-platform-favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg aria-hidden="true" class="defs">
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><path d="M12 2v4M22 12h-4M12 22v-4M2 12h4" /></symbol>
+      <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3V4Z" /><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3V4Z" /><path d="M9 9h6M9 15h6" /></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V5" /><path d="M4 19h16" /><path d="m7 15 3-4 3 2 5-7" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7Z" /><path d="M22 2 11 13" /></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="3" /><path d="M12 8V4" /><circle cx="9" cy="13" r="1" /><circle cx="15" cy="13" r="1" /><path d="M8 18v2M16 18v2" /></symbol>
+      <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="7" ry="3" /><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5" /><path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4" /><path d="m16 8 4 4-4 4" /><path d="m14 4-4 16" /></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h6l2 2h10v10a2 2 0 0 1-2 2H3V6Z" /></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M4 4v15.5" /><path d="M20 4v13" /><path d="M6.5 4H20" /></symbol>
+      <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 2 8 4v12l-8 4-8-4V6l8-4Z" /><path d="M4 6l8 4 8-4" /><path d="M12 10v12" /></symbol>
+      <symbol id="i-workflow" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /><circle cx="18" cy="6" r="3" /><circle cx="18" cy="18" r="3" /><path d="M9 6h6" /><path d="M18 9v6" /><path d="M15 18H8a2 2 0 0 1-2-2V9" /></symbol>
+      <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 16c-1 1-2 4-2 4s3-1 4-2" /><path d="M8 15 4 11l5-1 5-5c3-3 6-2 6-2s1 3-2 6l-5 5-1 5-4-4Z" /><circle cx="15" cy="8" r="1.5" /></symbol>
+      <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" /><circle cx="12" cy="12" r="3" /><path d="M6 9v.01M18 15v.01" /></symbol>
+      <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M8 3h5v4a2 2 0 1 0 0 4v4H9a2 2 0 1 1-4 0H3v-5h4a2 2 0 1 0 0-4V3h1Z" /><path d="M13 15h4v-4a2 2 0 1 1 0-4h4v14h-8v-6Z" /></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.6 3 7.6 7 9 4-1.4 7-4.4 7-9V6l-7-3Z" /><path d="m9 12 2 2 4-5" /></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></symbol>
+    </svg>
 
-<a href="/claude-cowork.html">
-Claude Cowork Landing
-</a>
+    <main class="page">
+      <section class="hero section-card" id="top">
+        <div class="hero-brand">
+          <img src="assets/flash-ai-platform-icon.webp" alt="FLASH AI Platform" />
+          <div>
+            <p class="eyebrow">AI-powered marketing & business automation</p>
+            <h1>FLASH AI Platform</h1>
+            <p class="hero-text">
+              Một nền tảng vận hành nội bộ giúp agency gom marketing, content, CRM, analytics,
+              automation, knowledge và AI agents vào cùng một hệ thống có phân quyền, audit và
+              workspace isolation rõ ràng.
+            </p>
+          </div>
+        </div>
+        <div class="hero-summary">
+          <article><strong>Operations-first</strong><span>Tập trung giải bài toán delivery, review, status, dữ liệu và báo cáo cho team đang scale.</span></article>
+          <article><strong>AI có boundary</strong><span>AI Agent không toàn quyền. Mọi action phải đi qua role, client scope và audit log.</span></article>
+          <article><strong>Data là trung tâm</strong><span>Supabase/Postgres đóng vai trò single source of truth cho client workspace và workflow.</span></article>
+        </div>
+      </section>
 
-</body>
+      <section class="section-card split-section">
+        <div class="section-heading">
+          <p class="eyebrow">Vision & Mission</p>
+          <h2>Tầm nhìn và mục tiêu vận hành</h2>
+          <p>
+            FLASH AI Platform không phải chỉ là một dashboard đẹp. Nó là lớp điều phối để giảm
+            thao tác thủ công, giảm lỗi khi chạy nhiều client, và biến AI thành một phần của quy trình
+            delivery có kiểm soát.
+          </p>
+        </div>
+        <div class="two-cards">
+          <article class="info-card">
+            <span class="icon cyan"><svg><use href="#i-eye" /></svg></span>
+            <h3>Vision</h3>
+            <p>Trở thành nền tảng AI trung tâm giúp doanh nghiệp vận hành, tự động hóa và tăng trưởng toàn diện.</p>
+            <p>Ở góc nhìn agency, vision này nghĩa là mọi client đều có workspace riêng, dữ liệu riêng, pipeline riêng và báo cáo riêng thay vì phải gom thủ công từ nhiều công cụ rời rạc.</p>
+          </article>
+          <article class="info-card">
+            <span class="icon gold"><svg><use href="#i-target" /></svg></span>
+            <h3>Mission</h3>
+            <p>Kết hợp AI, automation và data để giúp con người làm việc nhanh hơn, chính xác hơn và hiệu quả hơn.</p>
+            <p>AI hỗ trợ nghiên cứu, tạo draft, phân tích hiệu suất và đề xuất hành động; con người vẫn giữ vai trò kiểm duyệt, quyết định và kiểm soát rủi ro.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-heading">
+          <p class="eyebrow">Core Features</p>
+          <h2>Các nhóm năng lực chính</h2>
+          <p>
+            Các feature được chia theo workflow thật của agency: thu thập dữ liệu, tạo nội dung,
+            quản lý kênh, đo lường hiệu suất, quản trị tri thức và tự động hóa tác vụ lặp lại.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article><span class="icon pink"><svg><use href="#i-brain" /></svg></span><h3>AI Marketing</h3><p>Nghiên cứu thị trường, phân tích đối thủ, gợi ý chiến lược campaign và chuyển insight thành kế hoạch hành động.</p></article>
+          <article><span class="icon cyan"><svg><use href="#i-users" /></svg></span><h3>AI CRM</h3><p>Quản lý lead, khách hàng, pipeline và lịch sử chăm sóc để team sales/account không mất context.</p></article>
+          <article><span class="icon coral"><svg><use href="#i-pen" /></svg></span><h3>AI Content</h3><p>Tạo caption, outline, script, creative brief và biến research thành nội dung có thể review.</p></article>
+          <article><span class="icon green"><svg><use href="#i-chart" /></svg></span><h3>AI Analytics</h3><p>Tổng hợp dữ liệu hiệu suất, phát hiện biến động và viết insight/report theo từng client.</p></article>
+          <article><span class="icon cyan"><svg><use href="#i-send" /></svg></span><h3>AI Social Media</h3><p>Lên lịch, quản lý trạng thái publish, theo dõi kênh và đồng bộ dữ liệu social qua plugin.</p></article>
+          <article><span class="icon gold"><svg><use href="#i-folder" /></svg></span><h3>AI Workspace</h3><p>Tổ chức client workspace, task, tài liệu, asset, người phụ trách và trạng thái delivery.</p></article>
+          <article><span class="icon cyan"><svg><use href="#i-search" /></svg></span><h3>AI SEO</h3><p>Hỗ trợ keyword research, onpage/offpage checklist, content cluster và tối ưu bài viết.</p></article>
+          <article><span class="icon lime"><svg><use href="#i-book" /></svg></span><h3>AI Knowledge</h3><p>Biến knowledge vault thành nguồn context cho team và AI agents khi tạo nội dung hoặc báo cáo.</p></article>
+          <article><span class="icon violet"><svg><use href="#i-bot" /></svg></span><h3>AI Automation</h3><p>Tự động hóa các bước lặp lại: sync dữ liệu, ghi run status, tạo insight, gửi notification.</p></article>
+          <article><span class="icon cyan"><svg><use href="#i-cube" /></svg></span><h3>MCP & Plugin System</h3><p>Mở rộng khả năng agent thông qua tool/plugin có permission rõ, không trao toàn quyền hệ thống.</p></article>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-heading">
+          <p class="eyebrow">Tech Stack</p>
+          <h2>Nền tảng kỹ thuật hiện tại</h2>
+          <p>
+            Stack được chọn theo hướng practical: build nhanh MVP nhưng vẫn có nền tảng bảo mật,
+            phân quyền, dữ liệu và automation đủ chắc để scale nhiều client.
+          </p>
+        </div>
+        <div class="stack-grid">
+          <article><svg><use href="#i-code" /></svg><h3>Frontend</h3><p>Next.js, React, TypeScript, TailwindCSS. Đây là lớp UI cho dashboard, approval, analytics, settings và automation monitor.</p></article>
+          <article><svg><use href="#i-db" /></svg><h3>Backend</h3><p>Supabase, PostgreSQL, Edge Functions. Backend chịu trách nhiệm auth, database, RLS, API surface và dữ liệu trạng thái.</p></article>
+          <article><svg><use href="#i-workflow" /></svg><h3>Automation</h3><p>n8n workflow automation dùng cho daily analytics sync, scheduled publishing, retry, notification và error handling.</p></article>
+          <article><svg><use href="#i-brain" /></svg><h3>AI Models</h3><p>ChatGPT, Claude, Gemini, OpenAI hoặc provider tương thích. AI dùng để tạo draft, phân tích và viết report.</p></article>
+          <article><svg><use href="#i-folder" /></svg><h3>Storage</h3><p>Supabase Storage, NAS Synology hoặc S3-compatible storage để quản lý file, asset, media và document reference.</p></article>
+          <article><svg><use href="#i-send" /></svg><h3>Deployment</h3><p>Vercel, OnePanel, Docker. Tách môi trường dev/staging/prod và quản lý biến môi trường an toàn.</p></article>
+          <article><svg><use href="#i-cube" /></svg><h3>Integration</h3><p>MCP, REST API, webhook, plugin system. Tất cả integration cần boundary và audit rõ.</p></article>
+          <article><svg><use href="#i-chart" /></svg><h3>Monitoring</h3><p>Log, audit, analytics, performance. Quan trọng nhất là thấy được workflow nào lỗi, lỗi vì sao và ai cần xử lý.</p></article>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-heading">
+          <p class="eyebrow">System Architecture</p>
+          <h2>Kiến trúc một cột theo luồng dữ liệu</h2>
+          <p>
+            Thay vì nhìn 3 cột như infographic gốc, phần này đọc từ trên xuống dưới: ai sử dụng hệ thống,
+            AI điều phối gì, plugin kết nối gì, core platform giữ dữ liệu nào, và data layer nhận input từ đâu.
+          </p>
+        </div>
+        <div class="architecture-flow">
+          <article class="flow-block">
+            <div class="flow-title"><span>01</span><h3>User Layer</h3></div>
+            <p>Đây là lớp người dùng và actor tương tác với platform: Marketing Team, Content Team, Sales Team, Admin/Owner và AI Agents.</p>
+            <div class="pill-grid">
+              <span><svg><use href="#i-users" /></svg>Marketing Team</span>
+              <span><svg><use href="#i-users" /></svg>Content Team</span>
+              <span><svg><use href="#i-users" /></svg>Sales Team</span>
+              <span><svg><use href="#i-users" /></svg>Admin / Owner</span>
+              <span><svg><use href="#i-bot" /></svg>AI Agents</span>
+            </div>
+          </article>
+
+          <article class="flow-block highlight">
+            <div class="flow-title"><span>02</span><h3>AI Orchestrator - Central Brain</h3></div>
+            <p>AI Orchestrator là lớp điều phối: nhận context từ workspace/data, gọi đúng agent, giới hạn action theo permission và trả output về đúng workflow.</p>
+            <div class="agent-grid">
+              <article><h4>Research Agent</h4><p>Thu thập thông tin, xu hướng, đối thủ, customer insight.</p></article>
+              <article><h4>Content Agent</h4><p>Tạo nội dung đa định dạng: bài viết, hình ảnh, script, brief.</p></article>
+              <article><h4>SEO Agent</h4><p>Tối ưu SEO, keyword, structure, topic cluster và đề xuất cải thiện.</p></article>
+              <article><h4>Social Agent</h4><p>Quản lý publish flow, lịch đăng, kênh social và phản hồi cơ bản.</p></article>
+              <article><h4>Analytics Agent</h4><p>Đọc dữ liệu hiệu suất, phát hiện biến động, viết insight và next action.</p></article>
+              <article><h4>More Agents</h4><p>Mở rộng thêm theo nhu cầu: report, CRM, ads, support, knowledge.</p></article>
+            </div>
+          </article>
+
+          <article class="flow-block">
+            <div class="flow-title"><span>03</span><h3>MCP & Plugin Layer</h3></div>
+            <p>Lớp này kết nối platform với hệ bên ngoài như Facebook, Instagram, YouTube, TikTok, Zalo, Google, WordPress và plugin khác. Điểm quan trọng là agent không gọi trực tiếp lung tung; nó gọi capability đã được định nghĩa.</p>
+            <div class="plugin-grid">
+              <span class="platform-card facebook"><b class="brand-logo facebook-logo">f</b><small>Facebook</small></span>
+              <span class="platform-card instagram"><b class="brand-logo instagram-logo"></b><small>Instagram</small></span>
+              <span class="platform-card youtube"><b class="brand-logo youtube-logo"></b><small>YouTube</small></span>
+              <span class="platform-card tiktok"><b class="brand-logo tiktok-logo">♪</b><small>TikTok</small></span>
+              <span class="platform-card zalo"><b class="brand-logo zalo-logo">Zalo</b><small>Zalo</small></span>
+              <span class="platform-card google"><b class="brand-logo google-logo">G</b><small>Google</small></span>
+              <span class="platform-card wordpress"><b class="brand-logo wordpress-logo">W</b><small>WordPress</small></span>
+              <span class="platform-card more"><b class="brand-logo more-logo">•••</b><small>More Plugins</small></span>
+            </div>
+          </article>
+
+          <article class="flow-block">
+            <div class="flow-title"><span>04</span><h3>Core Platform</h3></div>
+            <p>Core Platform là phần giữ luật vận hành. Nó quản lý user, workspace, client, data, notification, audit và trạng thái workflow.</p>
+            <div class="core-grid">
+              <article><h4>Auth & Permission</h4><p>Đăng nhập, phân quyền, kiểm tra role trước khi cho phép action.</p></article>
+              <article><h4>Workspace System</h4><p>Quản lý client workspace, dự án, thành viên và context riêng.</p></article>
+              <article><h4>Data & Storage</h4><p>Lưu dữ liệu, file, media, document và metadata liên quan.</p></article>
+              <article><h4>Notification System</h4><p>Gửi email, in-app alert, webhook khi workflow cần người xử lý.</p></article>
+              <article><h4>Log & Audit System</h4><p>Ghi lịch sử user/agent/automation để truy vết lỗi và trách nhiệm.</p></article>
+            </div>
+          </article>
+
+          <article class="flow-block">
+            <div class="flow-title"><span>05</span><h3>Data Layer - Single Source of Truth</h3></div>
+            <p>Data Layer dùng Supabase/PostgreSQL làm trung tâm. Structured data như user, client, workspace, content, campaign được lưu có schema; unstructured data như file, image, video, document được quản lý qua storage/reference.</p>
+            <div class="data-row">
+              <article><svg><use href="#i-db" /></svg><h4>Structured Data</h4><p>Users, workspace, content, campaign, analytics, audit.</p></article>
+              <article class="supabase"><h4>Supabase</h4><p>PostgreSQL, Auth, RLS, Storage metadata.</p></article>
+              <article><svg><use href="#i-folder" /></svg><h4>Unstructured Data</h4><p>Files, images, videos, documents, assets.</p></article>
+            </div>
+          </article>
+
+          <article class="flow-block">
+            <div class="flow-title"><span>06</span><h3>Data Sources - Input</h3></div>
+            <p>Dữ liệu đi vào platform từ nhiều nguồn: website, social media, Google Analytics/Search, CRM & Sales, files/docs và hệ thống bên thứ ba qua API/webhook.</p>
+            <div class="source-grid">
+              <span>Website / WordPress</span><span>Social Media</span><span>Google</span><span>CRM & Sales</span><span>Files & Docs</span><span>Other Systems</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-heading">
+          <p class="eyebrow">Operation Workflow</p>
+          <h2>Quy trình vận hành từ insight đến tối ưu</h2>
+          <p>
+            Workflow được thiết kế để không phụ thuộc vào trí nhớ của PM. Mỗi bước đều có trạng thái,
+            output rõ ràng, người chịu trách nhiệm và điều kiện chuyển bước.
+          </p>
+        </div>
+        <div class="workflow-steps">
+          <article><span>01</span><h3>Research & Insight</h3><p>AI Agent nghiên cứu thị trường, đối thủ, khách hàng và xu hướng để tạo nền tảng chiến lược.</p></article>
+          <article><span>02</span><h3>Strategy & Planning</h3><p>AI phân tích dữ liệu, đề xuất chiến lược, kế hoạch kênh, lịch nội dung và hướng triển khai.</p></article>
+          <article><span>03</span><h3>Content Creation</h3><p>Tạo nội dung đa dạng, tối ưu SEO, bám brand voice và chuyển thành draft có thể review.</p></article>
+          <article><span>04</span><h3>Review & Approval</h3><p>Con người kiểm duyệt, chỉnh sửa, phê duyệt hoặc yêu cầu sửa trước khi publish.</p></article>
+          <article><span>05</span><h3>Publish & Distribute</h3><p>Tự động đăng bài lên đa kênh qua MCP plugins hoặc ghi task pending nếu API chưa sẵn sàng.</p></article>
+          <article><span>06</span><h3>Analytics & Reporting</h3><p>Thu thập dữ liệu, phân tích hiệu suất, tạo report và insight theo từng client/channel.</p></article>
+          <article><span>07</span><h3>Automation & Optimization</h3><p>AI và automation tối ưu liên tục dựa trên dữ liệu, feedback và kết quả thực tế.</p></article>
+        </div>
+      </section>
+
+      <section class="section-card split-section">
+        <div class="section-heading">
+          <p class="eyebrow">Key Benefits</p>
+          <h2>Lợi ích chính cho agency đang scale</h2>
+          <p>Giá trị của platform nằm ở việc giảm ma sát vận hành, tăng tốc delivery và làm cho dữ liệu có thể dùng được trong quyết định hằng ngày.</p>
+        </div>
+        <div class="benefit-grid">
+          <article><span class="icon coral"><svg><use href="#i-rocket" /></svg></span><h3>Tăng hiệu suất</h3><p>Giảm 70-90% thời gian cho các tác vụ marketing và vận hành lặp lại.</p></article>
+          <article><span class="icon green"><svg><use href="#i-money" /></svg></span><h3>Tiết kiệm chi phí</h3><p>Tối ưu nguồn lực, giảm thao tác tay và giảm chi phí vận hành theo từng client.</p></article>
+          <article><span class="icon gold"><svg><use href="#i-db" /></svg></span><h3>Dữ liệu chính xác</h3><p>Single Source of Truth giúp dữ liệu đồng bộ, nhất quán và dễ audit.</p></article>
+          <article><span class="icon coral"><svg><use href="#i-puzzle" /></svg></span><h3>Mở rộng dễ dàng</h3><p>Kiến trúc module giúp thêm client, channel, plugin và agent mà không phá nền tảng.</p></article>
+          <article><span class="icon green"><svg><use href="#i-shield" /></svg></span><h3>Bảo mật & an toàn</h3><p>RLS, RBAC, credential boundary và audit log giúp giảm rủi ro khi dùng AI/automation.</p></article>
+          <article><span class="icon violet"><svg><use href="#i-brain" /></svg></span><h3>Ra quyết định thông minh</h3><p>AI insight dựa trên dữ liệu realtime, context client và lịch sử vận hành.</p></article>
+        </div>
+      </section>
+
+      <section class="section-card split-section">
+        <div class="section-heading">
+          <p class="eyebrow">Workspace Isolation</p>
+          <h2>Mỗi khách hàng là một workspace độc lập</h2>
+          <p>
+            Đây là nguyên tắc sống còn khi agency scale nhiều client. Mỗi client cần data, assets,
+            channels, reports, permissions và workflow riêng để tránh trộn dữ liệu hoặc đăng nhầm.
+          </p>
+        </div>
+        <div class="workspace-grid">
+          <article><h3>PLITA</h3><p>Workspace riêng cho dữ liệu, content, report, channel và permission của PLITA.</p></article>
+          <article><h3>Dr Ngọc</h3><p>Workspace riêng để team phụ trách có context, lịch sử và asset đúng client.</p></article>
+          <article><h3>BIC</h3><p>Tách biệt dữ liệu, automation run và analytics snapshot theo client boundary.</p></article>
+          <article><h3>KTIRA</h3><p>Quản lý quy trình nội dung, kênh social và report riêng cho KTIRA.</p></article>
+        </div>
+        <ul class="isolation-list">
+          <li>Data isolation: dữ liệu mỗi client không bị lẫn nhau.</li>
+          <li>User isolation: thành viên chỉ thấy workspace được phân quyền.</li>
+          <li>Permission isolation: role và action được kiểm tra theo client.</li>
+          <li>Resource isolation: asset, file, report và workflow được scope theo workspace.</li>
+        </ul>
+      </section>
+
+      <section class="section-card">
+        <div class="section-heading">
+          <p class="eyebrow">AI Governance & Security</p>
+          <h2>Guardrail để AI và automation không vượt quyền</h2>
+          <p>
+            Khi automation mạnh hơn, rủi ro cũng lớn hơn. Vì vậy governance không phải phần phụ,
+            mà là lớp bắt buộc để platform có thể dùng thật trong vận hành client.
+          </p>
+        </div>
+        <div class="security-grid">
+          <article><svg><use href="#i-shield" /></svg><h3>Authentication & Authorization</h3><p>Đảm bảo người dùng đăng nhập và có quyền phù hợp trước khi truy cập workspace/action.</p></article>
+          <article><svg><use href="#i-users" /></svg><h3>Role-based Access Control</h3><p>Owner, admin, manager, member, viewer có quyền khác nhau theo từng client.</p></article>
+          <article><svg><use href="#i-lock" /></svg><h3>Data Encryption</h3><p>Dữ liệu nhạy cảm và credential cần được bảo vệ, không expose secret ra frontend.</p></article>
+          <article><svg><use href="#i-folder" /></svg><h3>Audit Log & Monitoring</h3><p>Mọi action quan trọng từ user, agent và automation đều cần ghi log để truy vết.</p></article>
+          <article><svg><use href="#i-db" /></svg><h3>Backup & Disaster Recovery</h3><p>Có phương án sao lưu và khôi phục khi lỗi dữ liệu hoặc lỗi workflow nghiêm trọng.</p></article>
+          <article><svg><use href="#i-shield" /></svg><h3>Compliance & Privacy</h3><p>Thiết kế theo hướng privacy-first, client-scoped và tránh expose dữ liệu không cần thiết.</p></article>
+          <article><svg><use href="#i-check" /></svg><h3>AI Ethics & Safety</h3><p>AI output cần có review, caveat và không tự động làm action rủi ro cao.</p></article>
+          <article><svg><use href="#i-users" /></svg><h3>Human-in-the-loop</h3><p>Content publish, credential refresh và action nhạy cảm phải có approval của người phù hợp.</p></article>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
